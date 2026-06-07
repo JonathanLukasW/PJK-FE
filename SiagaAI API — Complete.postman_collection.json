@@ -1,0 +1,880 @@
+{
+  "info": {
+    "_postman_id": "461f201b-104b-4a9b-8e2f-eafcbf36e9e9",
+    "name": "SiagaAI API — Complete",
+    "description": "Koleksi lengkap seluruh endpoint SiagaAI Backend.\n\nSetup:\n1. Set variable `base_url` = `http://localhost:8000`\n2. Jalankan [Chat] Buat Sesi Baru → session_id auto-tersimpan\n3. Jalankan [ML] predict terlebih dahulu untuk cek model",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "9691797",
+    "_collection_link": "https://go.postman.co/collection/9691797-461f201b-104b-4a9b-8e2f-eafcbf36e9e9?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "🏠 Root & Health",
+      "item": [
+        {
+          "name": "Root",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/health",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "health"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🤖 LLM Models",
+      "item": [
+        {
+          "name": "Daftar Semua Model",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/models",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "models"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Daftar Model Aktif",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/models/active",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "models",
+                "active"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Detail — Llama 3.3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/models/llama-3.3-70b-versatile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "models",
+                "llama-3.3-70b-versatile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Test Model",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/models/test?model_id=llama-3.3-70b-versatile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "models",
+                "test"
+              ],
+              "query": [
+                {
+                  "key": "model_id",
+                  "value": "llama-3.3-70b-versatile"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🧠 ML Model (Custom RF)",
+      "item": [
+        {
+          "name": "ML Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ml/health",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "ml",
+                "health"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Model Info",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ml/model-info",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "ml",
+                "model-info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Predict — Jakarta Banjir Ekstrem",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rainfall_1h\": 65, \"rainfall_3h\": 180, \"rainfall_24h\": 350,\n  \"humidity\": 95, \"temperature\": 26, \"wind_speed\": 8,\n  \"city_name\": \"Jakarta Utara\", \"month\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ml/predict",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "ml",
+                "predict"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Predict — Bandung Cerah",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rainfall_1h\": 0, \"rainfall_3h\": 0, \"rainfall_24h\": 3,\n  \"humidity\": 62, \"temperature\": 22, \"wind_speed\": 2,\n  \"city_name\": \"Bandung\", \"month\": 8\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ml/predict",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "ml",
+                "predict"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Predict Auto (OWM→ML) — Jakarta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lat\": -6.2088, \"lng\": 106.8456,\n  \"city\": \"Jakarta Pusat\",\n  \"province\": \"DKI Jakarta\",\n  \"display_name\": \"Jakarta Pusat, DKI Jakarta\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ml/predict-auto",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "ml",
+                "predict-auto"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Predict Auto (OWM→ML) — Surabaya",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lat\": -7.2575, \"lng\": 112.7521,\n  \"city\": \"Surabaya\",\n  \"province\": \"Jawa Timur\",\n  \"display_name\": \"Surabaya, Jawa Timur\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ml/predict-auto",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "ml",
+                "predict-auto"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Batch Predict — 3 Kota",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locations\": [\n    {\"city_name\":\"Jakarta Utara\",\"rainfall_1h\":55,\"rainfall_3h\":145,\"rainfall_24h\":290,\"humidity\":94,\"temperature\":26,\"wind_speed\":7},\n    {\"city_name\":\"Bandung\",\"rainfall_1h\":1,\"rainfall_3h\":3,\"rainfall_24h\":8,\"humidity\":65,\"temperature\":21,\"wind_speed\":2},\n    {\"city_name\":\"Semarang\",\"rainfall_1h\":35,\"rainfall_3h\":90,\"rainfall_24h\":170,\"humidity\":91,\"temperature\":27,\"wind_speed\":6}\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ml/batch",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "ml",
+                "batch"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "💬 Chat",
+      "item": [
+        {
+          "name": "Buat Sesi Baru",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const r=pm.response.json();",
+                  "if(r.success&&r.data.session_id)pm.collectionVariables.set('session_id',r.data.session_id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"location\": {\n    \"lat\": -6.2088, \"lng\": 106.8456,\n    \"city\": \"Jakarta Pusat\", \"province\": \"DKI Jakarta\",\n    \"display_name\": \"Jakarta Pusat, DKI Jakarta\"\n  },\n  \"model_name\": \"llama-3.3-70b-versatile\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/chat/sessions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "chat",
+                "sessions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Kirim Pesan — Cek Risiko",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Apakah aman keluar rumah sekarang? Hujan deras sejak pagi.\",\n  \"session_id\": \"{{session_id}}\",\n  \"model_name\": \"llama-3.3-70b-versatile\",\n  \"location\": {\"lat\":-6.2088,\"lng\":106.8456,\"city\":\"Jakarta Pusat\",\"province\":\"DKI Jakarta\",\"display_name\":\"Jakarta Pusat, DKI Jakarta\"},\n  \"history\": []\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/chat/send",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "chat",
+                "send"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Kirim Pesan — Panduan Evakuasi",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Air sudah masuk rumah. Bagaimana cara evakuasi yang benar?\",\n  \"session_id\": \"{{session_id}}\",\n  \"model_name\": \"llama-3.3-70b-versatile\",\n  \"location\": {\"lat\":-6.2088,\"lng\":106.8456,\"city\":\"Jakarta Pusat\",\"province\":\"DKI Jakarta\",\"display_name\":\"Jakarta Pusat, DKI Jakarta\"},\n  \"history\": []\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/chat/send",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "chat",
+                "send"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Kirim Pesan — Ganti Model Mixtral",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Apa isi tas siaga bencana yang harus disiapkan?\",\n  \"session_id\": \"{{session_id}}\",\n  \"model_name\": \"llama-3.1-8b-instant\",\n  \"location\": null,\n  \"history\": []\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/chat/send",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "chat",
+                "send"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Kirim Pesan — Situasi DARURAT",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"TOLONG! Saya terjebak, banjir sudah sepinggang, tidak bisa keluar!\",\n  \"session_id\": \"{{session_id}}\",\n  \"model_name\": \"llama-3.1-8b-instant\",\n  \"location\": {\"lat\":-6.2088,\"lng\":106.8456,\"city\":\"Jakarta Pusat\",\"province\":\"DKI Jakarta\",\"display_name\":\"Jakarta Pusat, DKI Jakarta\"},\n  \"history\": []\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/chat/send",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "chat",
+                "send"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Info Sesi",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/chat/sessions/{{session_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "chat",
+                "sessions",
+                "{{session_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Riwayat Pesan",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/chat/sessions/{{session_id}}/history",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "chat",
+                "sessions",
+                "{{session_id}}",
+                "history"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Tutup Sesi",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/chat/sessions/{{session_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "chat",
+                "sessions",
+                "{{session_id}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📍 Location",
+      "item": [
+        {
+          "name": "Status Cuaca + Risiko — Jakarta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lat\": -6.2088, \"lng\": 106.8456,\n  \"city\": \"Jakarta Pusat\", \"province\": \"DKI Jakarta\",\n  \"display_name\": \"Jakarta Pusat, DKI Jakarta\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/location/status",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "location",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Status Cuaca + Risiko — Bandung",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lat\": -6.9147, \"lng\": 107.6098,\n  \"city\": \"Bandung\", \"province\": \"Jawa Barat\",\n  \"display_name\": \"Bandung, Jawa Barat\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/location/status",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "location",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Geocode Kota",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/location/geocode?city=Yogyakarta",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "location",
+                "geocode"
+              ],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "Yogyakarta"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reverse Geocode",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/location/reverse?lat=-6.2088&lng=106.8456",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "location",
+                "reverse"
+              ],
+              "query": [
+                {
+                  "key": "lat",
+                  "value": "-6.2088"
+                },
+                {
+                  "key": "lng",
+                  "value": "106.8456"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Gempa Terkini BMKG",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/location/earthquakes?limit=5",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "location",
+                "earthquakes"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Prakiraan Cuaca 24h",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/location/forecast?lat=-6.2088&lng=106.8456",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "location",
+                "forecast"
+              ],
+              "query": [
+                {
+                  "key": "lat",
+                  "value": "-6.2088"
+                },
+                {
+                  "key": "lng",
+                  "value": "106.8456"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🚨 Escalation",
+      "item": [
+        {
+          "name": "Laporkan Situasi Darurat",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const r=pm.response.json();",
+                  "if(r.success&&r.data.escalation_id)pm.collectionVariables.set('escalation_id',r.data.escalation_id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"session_id\": \"{{session_id}}\",\n  \"location\": {\"lat\":-6.2088,\"lng\":106.8456,\"city\":\"Jakarta Pusat\",\"province\":\"DKI Jakarta\",\"display_name\":\"Jakarta Pusat, DKI Jakarta\"},\n  \"situation\": \"Banjir 1 meter masuk rumah, 4 orang terjebak termasuk 1 balita.\",\n  \"contact_name\": \"Budi Santoso\",\n  \"contact_phone\": \"081234567890\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/escalate",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "escalate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cek Status Laporan",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/escalate/{{escalation_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "escalate",
+                "{{escalation_id}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📚 Knowledge Base",
+      "item": [
+        {
+          "name": "Stats KB",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/knowledge/stats",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "knowledge",
+                "stats"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reload KB",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/knowledge/reload",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "knowledge",
+                "reload"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search KB",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"cara evakuasi saat banjir\",\n  \"n_results\": 3\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/knowledge/search",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "knowledge",
+                "search"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    },
+    {
+      "key": "session_id",
+      "value": ""
+    },
+    {
+      "key": "escalation_id",
+      "value": ""
+    }
+  ]
+}
