@@ -11,6 +11,9 @@ import {
   MapPin,
   RefreshCw,
   Navigation,
+  CheckCircle2,
+  Circle,
+  Construction,
 } from "lucide-react";
 import type { PredictRequest } from "@/types";
 import { AVAILABLE_CITIES } from "@/lib/constants";
@@ -38,6 +41,97 @@ const INPUT_FIELDS = [
   { key: "wind_speed" as const, label: "Kecepatan Angin", icon: Wind, unit: "km/h", min: 0, max: 200, step: 0.1 },
   { key: "month" as const, label: "Bulan", icon: Calendar, unit: "", min: 1, max: 12, step: 1 },
 ];
+
+const INTEGRATION_ITEMS = [
+  {
+    id: "notification",
+    label: "Notification Integration",
+    status: "inprogress" as const,
+    description: "Push notification & alert pipeline",
+  },
+  {
+    id: "google-auth",
+    label: "Google Authentication",
+    status: "done" as const,
+    description: "NextAuth v5 + Zustand global state",
+  },
+  {
+    id: "backend-sync",
+    label: "Backend User Sync",
+    status: "todo" as const,
+    description: "Sinkronisasi session ke backend API",
+  },
+  {
+    id: "notif-subscription",
+    label: "Automated Notification Subscription",
+    status: "todo" as const,
+    description: "Auto-subscribe berdasarkan lokasi user",
+  },
+];
+
+function IntegrationStatusCard() {
+  return (
+    <div className="card overflow-hidden">
+      <div className="px-5 py-4 border-b border-[var(--border-muted)] flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg bg-amber-500/10 flex items-center justify-center">
+            <Construction className="w-4 h-4 text-amber-500" />
+          </div>
+          <div>
+            <h2 className="text-sm font-bold text-[var(--fg)]">Status Integrasi</h2>
+            <p className="text-xs text-[var(--fg-muted)]">Demo Capstone — roadmap fitur</p>
+          </div>
+        </div>
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold
+          bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+          In Progress
+        </span>
+      </div>
+
+      <div className="divide-y divide-[var(--border-muted)]">
+        {INTEGRATION_ITEMS.map((item) => (
+          <div
+            key={item.id}
+            className="flex items-start gap-3 px-5 py-3.5 hover:bg-[var(--bg-subtle)]/40 transition-colors"
+          >
+            {item.status === "done" ? (
+              <CheckCircle2 className="w-4 h-4 text-teal-500 mt-0.5 shrink-0" />
+            ) : item.status === "inprogress" ? (
+              <Construction className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+            ) : (
+              <Circle className="w-4 h-4 text-[var(--fg-subtle)] mt-0.5 shrink-0" />
+            )}
+            <div className="min-w-0">
+              <p
+                className={`text-sm font-medium ${item.status === "done"
+                  ? "text-teal-600 dark:text-teal-400"
+                  : item.status === "inprogress"
+                    ? "text-amber-600 dark:text-amber-400"
+                    : "text-[var(--fg-muted)]"
+                  }`}
+              >
+                {item.status === "inprogress" ? "🚧 " : item.status === "done" ? "✓ " : "□ "}
+                {item.label}
+              </p>
+              <p className="text-xs text-[var(--fg-subtle)] mt-0.5">{item.description}</p>
+            </div>
+            <span
+              className={`ml-auto shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full border ${item.status === "done"
+                ? "bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20"
+                : item.status === "inprogress"
+                  ? "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20"
+                  : "bg-[var(--bg-subtle)] text-[var(--fg-muted)] border-[var(--border-muted)]"
+                }`}
+            >
+              {item.status === "done" ? "Done" : item.status === "inprogress" ? "WIP" : "Todo"}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function DashboardPage() {
   const toast = useToast();
@@ -341,6 +435,8 @@ export default function DashboardPage() {
             />
           </div>
         )}
+
+        <IntegrationStatusCard />
 
       </div>
     </>

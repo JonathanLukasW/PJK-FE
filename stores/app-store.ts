@@ -5,6 +5,12 @@ import { getLocationStatus } from "@/services/api/location";
 
 export type LocationMode = "auto" | "manual";
 
+export interface AuthUser {
+  name: string | null;
+  email: string | null;
+  image: string | null;
+}
+
 export type ConnectionMode =
   | "live"
   | "mock"
@@ -28,6 +34,9 @@ export interface ModelInfoState {
 }
 
 interface AppState {
+  authUser: AuthUser | null;
+  setAuthUser: (user: AuthUser | null) => void;
+
   locationMode: LocationMode;
   setLocationMode: (mode: LocationMode) => void;
   selectedCity: string;
@@ -81,6 +90,9 @@ const EMPTY_WEATHER: PredictRequest = {
 };
 
 export const useAppStore = create<AppState>((set) => ({
+  authUser: null,
+  setAuthUser: (user) => set({ authUser: user }),
+
   locationMode: "auto",
   setLocationMode: (mode) => {
     persistLocationMode(mode);

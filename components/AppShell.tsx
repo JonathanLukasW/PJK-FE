@@ -7,6 +7,7 @@ import { ToastProvider } from "@/components/ui/Toast";
 import { FloatingSOS } from "@/components/FloatingSOS";
 import { GlobalHealthCheck } from "@/components/GlobalHealthCheck";
 import { useAppStore } from "@/stores/app-store";
+import { AuthSync } from "@/components/AuthSync";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -44,6 +45,7 @@ export function AppShell({ children }: AppShellProps) {
 
   return (
     <ToastProvider>
+      <AuthSync />
       <GlobalHealthCheck />
       <Navbar isSidebarOpen={isSidebarOpen} onToggleSidebar={toggleSidebar} />
 

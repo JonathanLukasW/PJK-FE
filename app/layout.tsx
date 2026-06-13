@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AppShell } from "@/components/AppShell";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "SiagaAI – Sistem Peringatan Dini Banjir Berbasis AI",
@@ -27,14 +28,16 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <body className="antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <AppShell>{children}</AppShell>
-        </ThemeProvider>
+        <SessionProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <AppShell>{children}</AppShell>
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );
